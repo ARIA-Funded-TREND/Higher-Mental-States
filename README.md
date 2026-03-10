@@ -54,8 +54,8 @@ TREND@stir.ac.uk
 
 Standard Transformer architectures primarily compute relevance through attention, often relying on deep stacks and quadratic attention complexity. In contrast, the Co⁴ architecture, which implements principles underlying awake imaginative dynamics, enables the model to:
 
-- generate internal predictions that pre-select relevant information prior to attention through neuronal-level triadic Q–K–V modulation loops.
-- enforce contextual coherence at the representation level before attention is applied.
+- generate internal predictions that pre-select relevant information prior to downstream readout through neuronal-level triadic Q–K–V modulation loops.
+- enforce contextual coherence at the representation level before downstream readout is applied.
 - accelerate learning while reducing computational demand (e.g., fewer heads, layers, and tokens)
 - approximate near-linear scaling behaviour with respect to the number of input tokens $N$
 
@@ -101,7 +101,7 @@ These correspond to:
 
 
 ## 🏗️ Architecture
-The specific form of the triadic modulation loops and the _R–C_ integration strategies may vary across datasets and hyperparameter configurations. For example, Figure 1(b) represents one of the architectural variants evaluated in this paper, building on the basic architecture; other architectural instantiations are possible. The key element, however, is the cooperative modulation dynamics _(MOD(R, C))_ operating under distinct mental-state-dependent processing regimes 
+The specific form of the triadic modulation loops and the _R–C_ integration strategies may vary across datasets and hyperparameter configurations. For example, Figure below represents one of the architectural variants evaluated in this paper, building on the basic architecture; other architectural instantiations are possible. The key element, however, is the cooperative modulation dynamics _(MOD(R, C))_ operating under distinct mental-state-dependent processing regimes. 
 
 ![System Architecture](./assets/Co41n.png)
 
@@ -110,7 +110,7 @@ The specific form of the triadic modulation loops and the _R–C_ integration st
 Latent $Q_{\text{L}}$, $K_{\text{L}}$, and $V_{\text{L}}$ tokens are initialized from a random distribution and serve as feedforward (FF) inputs i.e., receptive fields (R). Contextual input, including $Q_X$, $K_X$, and $V_X$ are FF contextual projections that assume proximal (P) or distal (D) roles relative to the active TPN population, whereas $\mu$ functions as universal (U) context and provides the recurrent feedback within the iterative dynamics. The TPN-like circuits governing $Q_m$, $K_m$, and $V_m$ then evolve via MOD dynamics determined by the relative magnitudes of $R$ and $C$ inputs, corresponding to the neurobiological apical drive (AD) and AD + awake processing regimes. The resulting modulated representations $Q_m$, $K_m$, and $V_m$ are subsequently selected and passed to the self-attention block, or alternatively, $V_m$ is simply passed to an MLP layer.
 
 ## Gradient Flow  
-Different modulatory cooperation laws Φ(𝑅,𝐶) reshape the cooperation surface and its gradient field ∇Φ(𝑅,𝐶) over the 𝑅−𝐶 space. Changes in contextual and receptive-field strength move the system between apical isolation, apical amplification, apical drive, and AD+Awake regimes, producing corresponding deformations in the geometry of gradient flow. By shaping representations prior to attention, these modulation laws guide gradients along coherent R–C interaction manifolds, reducing propagation through noisy or irrelevant directions. This structured learning geometry helps explain the faster convergence and improved learning efficiency observed in Co<sup>4</sup> compared to standard Transformers, where gradients propagate without such context-conditioned modulation.
+Different modulatory cooperation laws Φ(𝑅,𝐶) reshape the cooperation surface and its gradient field ∇Φ(𝑅,𝐶) over the 𝑅−𝐶 space. Changes in contextual and receptive-field strength move the system between apical amplification, apical drive, and AD+Awake regimes, producing corresponding deformations in the geometry of gradient flow. By shaping representations prior to attention, these modulation laws guide gradients along coherent _R–C_ interaction manifolds, reducing propagation through noisy or irrelevant directions. This structured learning geometry helps explain the faster convergence and improved learning efficiency observed in Co<sup>4</sup> compared to standard Transformers, where gradients propagate without such context-conditioned modulation.
 
 ## Object Classification 
 ![Comparison](./assets/bird.png)
